@@ -1,0 +1,34 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?><students>
+    <student>
+        <studentId>1</studentId>
+        <studentName>Mai Thanh Toan</studentName>
+        <score>7</score>
+        <image/>
+        <address>Ha Noi</address>
+        <description>Thanh tich tot</description>
+    </student>
+    <student>
+        <studentId>2</studentId>
+        <studentName>Pham Phong Phu Cuong</studentName>
+        <score>7.5</score>
+        <image/>
+        <address>Ho Chi Minh</address>
+        <description>Khong co ghi chu</description>
+    </student>
+    <student>
+        <studentId>3</studentId>
+        <studentName>KIEN</studentName>
+        <score>12.0</score>
+        <image/>
+        <address>Da Nang</address>
+        <description>Khong Co thong tin</description>
+    </student>
+    <student>
+        <studentId>4</studentId>
+        <studentName>THANH</studentName>
+        <score>3.0</score>
+        <image/>
+        <address>HOI AN</address>
+        <description>NONE</description>
+    </student>
+</students>
