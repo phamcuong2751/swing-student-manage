@@ -7,19 +7,18 @@ import javax.swing.*;
 import javax.swing.table.DefaultTableModel;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.util.ArrayList;
 import java.util.List;
 import java.util.Vector;
 
 public class ListAllStudent extends JFrame {
     private JPanel mainPanel;
-    private static final String[] columns = {"Student ID", "Student Name", "Score", "Address", "Description"};
-    private DefaultTableModel tableModel = new DefaultTableModel(columns, 1);
     private static final String FILENAME = "data-student.xml";
     private JTable table_listAllStudent;
+    private JTextField tb_studentId;
     private JTextField tb_score;
     private JTextField tb_studentName;
     private JTextField tb_description;
-    private JTextField tb_studentId;
     private JTextField tb_address;
     private JButton addButton;
     private JButton updateButton;
@@ -36,7 +35,37 @@ public class ListAllStudent extends JFrame {
 
     private void createUIComponents() {
         XMLReader xmlFile = new XMLReader();
-        List<MStudent> listStudent = xmlFile.read(FILENAME);
+        loadTable();
+
+        addButton.addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                MStudent student = new MStudent();
+                student.setStudentID(tb_studentId.getText());
+                student.setStudentName(tb_studentName.getText());
+                student.setScore( Float.parseFloat(tb_score.getText()));
+                student.setAddress(tb_address.getText());
+                student.setDescription(tb_description.getText());
+                xmlFile.write(student, FILENAME);
+
+                loadTable();
+            }
+        });
+    }
+
+    private void loadTable() {
+        XMLReader xmlFile = new XMLReader();
+        List<MStudent> listStudent = new ArrayList<MStudent>();
+        listStudent = xmlFile.read(FILENAME);
+
+        DefaultTableModel tableModel = new DefaultTableModel();
+        tableModel.setColumnCount(1);
+        tableModel.setRowCount(1);
+        tableModel.addColumn("Student ID");
+        tableModel.addColumn("Student Name");
+        tableModel.addColumn("Score");
+        tableModel.addColumn("Address");
+        tableModel.addColumn("Description");
 
         for (MStudent student : listStudent) {
             Vector v = new Vector();
@@ -49,18 +78,5 @@ public class ListAllStudent extends JFrame {
         }
 
         table_listAllStudent.setModel(tableModel);
-
-        addButton.addActionListener(new ActionListener() {
-            @Override
-            public void actionPerformed(ActionEvent e) {
-                MStudent student = new MStudent();
-                student.setStudentID(tb_studentId.getText());
-                student.setStudentName(tb_studentName.getText());
-                student.setScore( Float.parseFloat(tb_score.getText()));
-                student.setAddress(tb_address.getText());
-                student.setDescription(tb_description.getText());
-                xmlFile.write(student, FILENAME);
-            }
-        });
     }
 }
